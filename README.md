@@ -6,15 +6,15 @@ Experimental implementation of a normalizing flow that uses (reversible) symplec
 
 Hamiltonian dynamics describe a system using a set of canonical coordinates $(p, q)$, often referred to as momentum and position respectively. Hamilton's equations in canonical coordinates are given by:
 
-1. $\mathrm dq/dt = \frac{\partial H}{\partial p}$
-2. $\mathrm dp/dt = -\frac{\partial H}{\partial q}$
+1. $\mathrm dq/\mathrm dt = \frac{\partial H}{\partial p}$
+2. $\mathrm dp/\mathrm dt = -\frac{\partial H}{\partial q}$
 
 where $H(p, q)$ is the Hamiltonian, representing the total energy of the system. For the class of Hamiltonians considered here, which separate into kinetic and potential energy terms $H(p, q) = K(p) + V(q)$, these equations simplify to the system solved in the code:
 
-1. $\mathrm dx/dt = v$
-2. $\mathrm dv/dt = -\nabla V(x)$
+1. $\mathrm dx/\mathrm dt = v$
+2. $\mathrm dv/\mathrm dt = -\nabla V(x)$
 
-where $x$ denotes position and $v$ denotes velocity. Here, $\nabla V(x)$ represents the force acting on a particle at position $x$, derived from the gradient of the potential energy $V(x)$.
+where $x$ denotes position and $v$ denotes velocity.
 
 ## Symplectic integration with leapfrog
 
