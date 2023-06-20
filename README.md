@@ -1,6 +1,6 @@
 # Symplectic Normalizing Flow 
 
-Experimental implementation of a normalizing flow that uses (reversible) symplectic integration to define the transformation. The time-dependent potential is optimized to pull back data points into the base distribution. This is described in [demo.ipynb](demo.ipynb).
+Experimental implementation of a normalizing flow that uses (reversible) symplectic transformations. The time-dependent potential is optimized to pull back data points into the base distribution. Uses Jax, Flax, and Diffrax. Example in [demo.ipynb](demo.ipynb).
 
 The flow is not particularly expressive, and is mainly intended to be pedagogical. However, it does seem to work well when the canonical coordinates have a natural physical interpretation.
 
@@ -26,7 +26,7 @@ The dynamics of the Hamiltonian system are discretized using the leapfrog algori
 2. $x_1 = x_0 + \Delta t \, v_{1/2}$
 3. $v_1 = v_{1/2} - \frac{1}{2} \Delta t \, \nabla V(x_1)$
 
-This is implemented with `diffrax`.
+This is implemented as an ODE with Diffrax.
 
 ## Probability density and sampling
 
