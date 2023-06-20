@@ -36,4 +36,4 @@ $$V(x; t): \mathbb R^{n+1}\rightarrow \mathbb R$$
 
 Due to the symplectic nature of the transformation, the Jacobian determinant is unity. The change of variables formula is therefore:
 $$\log p_x(x) = \log \pi_z(z)$$
-Here, $p_x(x)$ denotes the probability density of the transformed distribution and $\pi_z(z)$ is the probability density of the base Gaussian distribution. Sampling is done by drawing from the base Gaussian, and then transporting particles in the forward direction using the learned potential. Running the flow backwards, the potential transports the particles back to a base distribution, a standard Gaussian $\pi_z(z)$. 
+Here, $p_x(x)$ is the probability density of the target distribution and $\pi_z(z)$ is the probability density of the base Gaussian distribution. Sampling is done by drawing from the base Gaussian, and then transporting particles in the forward direction using the learned potential. Running the flow backwards, the potential transports the particles back to a base distribution.
