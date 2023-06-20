@@ -2,7 +2,7 @@
 
 Experimental implementation of a normalizing flow that uses (reversible) symplectic integration to define the transformation. The time-dependent potential is optimized to pull back data points into the base distribution. This is described in [demo.ipynb](demo.ipynb).
 
-The flow is not particularly expressive, and is mainly intended to be pedagogical.
+The flow is not particularly expressive, and is mainly intended to be pedagogical. However, it does seem to work well when the canonical coordinates have a natural physical interpretation.
 
 ## Hamiltonian dynamics and canonical coordinates
 
@@ -32,7 +32,7 @@ This is implemented with `diffrax`.
 
 The potential 
 $$V(x; t): \mathbb R^{n+1}\rightarrow \mathbb R$$
- along with its time dependence define the flow transformation. It is modeled by a simple MLP. 
+along with its time dependence define the flow transformation. It is modeled by a simple MLP. 
 
 Due to the symplectic nature of the transformation, the Jacobian determinant is unity. The change of variables formula is therefore:
 $$\log p_x(x) = \log \pi_z(z)$$
