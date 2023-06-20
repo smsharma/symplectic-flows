@@ -30,7 +30,9 @@ This is implemented with `diffrax`.
 
 ## Probability density and sampling
 
-The potential $V(x; t); \math bb R^{n+1}\rightarrow \mathbb R$ along with its time dependence define the flow transformation. It is modeled by a simple MLP. 
+The potential 
+$$V(x; t): \mathbb R^{n+1}\rightarrow \mathbb R$$
+ along with its time dependence define the flow transformation. It is modeled by a simple MLP. 
 
 Due to the symplectic nature of the transformation, the Jacobian determinant is unity. The change of variables formula is therefore:
 $$\log p_x(x) = \log \pi_z(z)$$
