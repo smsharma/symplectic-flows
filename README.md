@@ -1,8 +1,14 @@
 # Symplectic Normalizing Flow 
 
-Experimental implementation of a normalizing flow that uses (reversible) symplectic transformations. The time-dependent potential is optimized to pull back data points into the base distribution. Uses Jax, Flax, and Diffrax. Example in [demo.ipynb](demo.ipynb).
+Experimental implementation of a normalizing flow that uses (reversible) symplectic transformations. The time-dependent potential is optimized to pull back data points into the base distribution. Uses Jax, Flax, and Diffrax. 
 
 The flow is not particularly expressive, and is mainly intended to be pedagogical. However, it does seem to work well when the canonical coordinates have a natural physical interpretation.
+
+- Example in [demo.ipynb](demo.ipynb).
+- [phase-space.ipynb](phase-space.ipynb) is an attempt to apply a discretized leapfrog-based from for simultaneous phase-space density estimation while tying it to a physical present-day potential $\Phi(x)$. In this case, we have physics positions and velocities (phase-space samples), and the loss is
+$$\mathcal L = -\sum_{i=1}^N_\mathrm{stars} \log p_x(x_i) + |\frac{df}{dt}|$$
+where
+$$\frac{df}{dt} = -v \frac{df}{dx} - \dot v \frac{df}{dv}$$
 
 ## Hamiltonian dynamics and canonical coordinates
 
@@ -11,10 +17,10 @@ Hamiltonian dynamics describe a system using a set of canonical coordinates $(p,
 1. $\mathrm dq/\mathrm dt = \frac{\partial H}{\partial p}$
 2. $\mathrm dp/\mathrm dt = -\frac{\partial H}{\partial q}$
 
-where $H(p, q)$ is the Hamiltonian, representing the total energy of the system. For the class of Hamiltonians considered here, which separate into kinetic and potential energy terms $H(p, q) = K(p) + V(q)$, these equations simplify to the system solved in the code:
+where $H(p, q)$ is the Hamiltonian, representing the total energy of the system. For the class of Hamiltonians considered here, which separate into kinetic and potential energy terms $H(p, q) = K(p) + \Phi(q)$, these equations simplify to the system solved in the code:
 
 1. $\mathrm dx/\mathrm dt = v$
-2. $\mathrm dv/\mathrm dt = -\nabla V(x)$
+2. $\mathrm dv/\mathrm dt = -\nabla \Phi(x)$
 
 where $x$ denotes position and $v$ denotes velocity.
 
@@ -22,16 +28,16 @@ where $x$ denotes position and $v$ denotes velocity.
 
 The dynamics of the Hamiltonian system are discretized using the leapfrog algorithm, a symplectic integration scheme, which performs updates in the following manner.
 
-1. $v_{1/2} = v_0 - \frac{1}{2} \Delta t \, \nabla V(x_0)$
+1. $v_{1/2} = v_0 - \frac{1}{2} \Delta t \, \nabla \Phi(x_0)$
 2. $x_1 = x_0 + \Delta t \, v_{1/2}$
-3. $v_1 = v_{1/2} - \frac{1}{2} \Delta t \, \nabla V(x_1)$
+3. $v_1 = v_{1/2} - \frac{1}{2} \Delta t \, \nabla \Phi(x_1)$
 
 This is implemented as an ODE with Diffrax.
 
 ## Probability density and sampling
 
 The potential 
-$$V(x; t): \mathbb R^{n+1}\rightarrow \mathbb R$$
+$$\Phi(x; t): \mathbb R^{n+1}\rightarrow \mathbb R$$
 along with its time dependence define the flow transformation. It is modeled by a simple MLP. 
 
 Due to the symplectic nature of the transformation, the Jacobian determinant is unity. The change of variables formula is therefore:
