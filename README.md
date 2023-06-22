@@ -6,9 +6,9 @@ The flow is not particularly expressive, and is mainly intended to be pedagogica
 
 - Example in [demo.ipynb](demo.ipynb).
 - [phase-space.ipynb](phase-space.ipynb) is an attempt to apply a discretized leapfrog-based from for simultaneous phase-space density estimation while tying it to a physical present-day potential $\Phi(x)$. In this case, we have physics positions and velocities (phase-space samples), and the loss is
-$$\mathcal L = -\sum_{i=1}^N_\mathrm{stars} \log p_x(x_i) + |\frac{df}{dt}|$$
+$$\mathcal L = -\sum_{i=1}^{N_\mathrm{stars}} \left(\log p_x(x_i) + |\frac{df(x_i, v_i)}{dt}|\right)$$
 where
-$$\frac{df}{dt} = -v \frac{df}{dx} - \dot v \frac{df}{dv}$$
+$$\frac{\mathrm df}{\mathrm dt} = -v \frac{\mathrm df}{dx} - \dot v \frac{\mathrm df}{\mathrm dv}$$
 
 ## Hamiltonian dynamics and canonical coordinates
 
