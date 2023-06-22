@@ -6,7 +6,7 @@ The flow is not particularly expressive, and is mainly intended to be pedagogica
 
 - Example in [demo.ipynb](demo.ipynb).
 - [phase-space.ipynb](phase-space.ipynb) is an attempt to apply a discretized leapfrog-based from for simultaneous phase-space density estimation while tying it to a physical present-day potential $\Phi(x)$. In this case, we have physical positions and velocities (phase-space samples), and the loss is a sum of phase-space log-density and CBE terms.
-$$\mathcal L = -\sum_{i=1}^{N_\mathrm{stars}} \left(\log f(x_i, v_i) + \left|\frac{\frac f(x_i, v_i)}{\frac dt}\right|\right)$$
+$$\mathcal L = -\sum_{i=1}^{N_\mathrm{stars}} \left(\log f(x_i, v_i) + \left|\frac{f(x_i, v_i)}{dt}\right|\right)$$
 where
 $$\frac{\mathrm df}{\mathrm dt} = -v \frac{\mathrm df}{dx} - \dot v \frac{\mathrm df}{\mathrm dv}$$
 
