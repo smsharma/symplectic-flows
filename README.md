@@ -28,9 +28,9 @@ where $x$ denotes position and $v$ denotes velocity.
 
 The dynamics of the Hamiltonian system are discretized using the leapfrog algorithm, a symplectic integration scheme, which performs updates in the following manner.
 
-1. $v_{1/2} = v_0 - \frac{1}{2} \Delta t \, \nabla \Phi(x_0)$
-2. $x_1 = x_0 + \Delta t \, v_{1/2}$
-3. $v_1 = v_{1/2} - \frac{1}{2} \Delta t \, \nabla \Phi(x_1)$
+1. $v_{1/2} = v_0 - \frac{1}{2} \Delta t \cdot \nabla \Phi(x_0)$
+2. $x_1 = x_0 + \Delta t \cdot v_{1/2}$
+3. $v_1 = v_{1/2} - \frac{1}{2} \Delta t \cdot \nabla \Phi(x_1)$
 
 This is implemented as an ODE with Diffrax.
 
