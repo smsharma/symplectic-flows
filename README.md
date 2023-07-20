@@ -5,10 +5,10 @@ Experimental implementation of a normalizing flow that uses (reversible) symplec
 The flow is not particularly expressive, and is mainly intended to be pedagogical. However, it does seem to work well when the canonical coordinates have a natural physical interpretation.
 
 - Example in [symplectic-flows/demo.ipynb](demo.ipynb).
-- [symplectic-flows/phase-space.ipynb](phase-space.ipynb) is an attempt to apply a discretized leapfrog-based from for simultaneous phase-space density estimation while tying it to a physical present-day potential $\Phi(x)$. In this case, we have physical positions and velocities (phase-space samples), and the loss is a sum of phase-space log-density and CBE terms.
+- [symplectic-flows/phase-space.ipynb](phase-space.ipynb) is an attempt to apply a discretized leapfrog-based transformation for phase-space density estimation while simultaneously tying it to a physical present-day potential $\Phi(x)$. In this case, we have physical positions and velocities (phase-space samples), and the loss is a sum of phase-space log-density and CBE terms,
 $$\mathcal L = \sum_{i=1}^{N_\mathrm{stars}}\left[-\log f(x_i, v_i) + \left|\frac{\mathrm df(x_i, v_i)}{\mathrm dt}\right|\right]$$
 where
-$$\frac{\mathrm df}{\mathrm dt} = -v \frac{\mathrm df}{dx} - \dot v \frac{\mathrm df}{\mathrm dv}$$
+$$\frac{\mathrm df}{\mathrm dt} = -v \frac{\mathrm df}{dx} - \dot v \frac{\mathrm df}{\mathrm dv}.$$
 
 ## Hamiltonian dynamics and canonical coordinates
 
@@ -28,9 +28,9 @@ where $x$ denotes position and $v$ denotes velocity.
 
 The dynamics of the Hamiltonian system are discretized using the leapfrog algorithm, a symplectic integration scheme, which performs updates in the following manner.
 
-1. $v_{1/2} = v_0 - \frac{1}{2} \Delta t \, \nabla \Phi(x_0)$
-2. $x_1 = x_0 + \Delta t \, v_{1/2}$
-3. $v_1 = v_{1/2} - \frac{1}{2} \Delta t \, \nabla \Phi(x_1)$
+1. $v_{1/2} = v_0 - \frac{1}{2} \Delta t \cdot \nabla \Phi(x_0)$
+2. $x_1 = x_0 + \Delta t \cdot v_{1/2}$
+3. $v_1 = v_{1/2} - \frac{1}{2} \Delta t \cdot \nabla \Phi(x_1)$
 
 This is implemented as an ODE with Diffrax.
 
